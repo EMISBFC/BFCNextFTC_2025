@@ -1,5 +1,6 @@
-package org.firstinspires.ftc.teamcode.example.java;
+package org.firstinspires.ftc.teamcode.Subsystems;
 
+import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.rowanmcalpin.nextftc.core.Subsystem;
 import com.rowanmcalpin.nextftc.core.command.Command;
@@ -13,19 +14,28 @@ public class Claw extends Subsystem {
 
     // USER CODE
     public Servo servo;
+    private boolean isOpen = false;
     
     public String name = "claw_servo";
 
     public Command open() {
-        return new ServoToPosition(servo, // SERVO TO MOVE
-                0.9, // POSITION TO MOVE TO
-                this); // IMPLEMENTED SUBSYSTEM
+        return new ServoToPosition(servo,
+                0.9,
+                this);
     }
 
     public Command close() {
-        return new ServoToPosition(servo, // SERVO TO MOVE
-                0.2, // POSITION TO MOVE TO
-                this); // IMPLEMENTED SUBSYSTEM
+        return new ServoToPosition(servo,
+                0.2,
+                this);
+    }
+
+    public Command toggle(){
+        if(isOpen) {
+            return close();
+        } else {
+            return open();
+        }
     }
 
     @Override

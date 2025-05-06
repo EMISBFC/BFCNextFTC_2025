@@ -16,24 +16,26 @@ public class Claw extends Subsystem {
     public Servo servo;
     private boolean isOpen = false;
     
-    public String name = "claw_servo";
+    public String name = "highGripperServo";
 
     public Command open() {
         return new ServoToPosition(servo,
-                0.9,
+                0.89,
                 this);
     }
 
     public Command close() {
         return new ServoToPosition(servo,
-                0.2,
+                0.35,
                 this);
     }
 
     public Command toggle(){
         if(isOpen) {
+            isOpen = false;
             return close();
         } else {
+            isOpen = true;
             return open();
         }
     }
